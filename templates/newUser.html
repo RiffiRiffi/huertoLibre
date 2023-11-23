@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Huerto Libre</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <main class="form-signin w-100 m-auto">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; position: absolute; top: 0; left: 0; height: 30%; width: 100%;">
+          <h1>CREAR NUEVO USUARIO:</h1>
+          <h3>Por favor, rellena los campos</h3>
+        </div>
+        <div style="margin-top: 100px;">
+            <form id="formularioNuevoUser" action="/nuevoUsuario/" method="post">
+                <div class="mb-3">
+                    <label for="FCNombreCompleto" class="form-label" >Nombre completo</label>
+                    <input type="text" class="form-control" id="FCNombreCompleto" name="FCFullName" placeholder="Ej: Anton Regal" required>
+                </div>
+                <div class="mb-3">
+                    <label for="FCNombreUsuario" class="form-label" >Nombre usuario</label>
+                    <input type="text" class="form-control" id="FCNombreUsuario" name="userNameFc" placeholder="Ej: Regal15" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pass" class="form-label" >Contraseña</label>
+                    <input type="text" class="form-control" id="pass" name="FCPass" placeholder="Ej:1234" required>
+                </div>
+                <div class="mb-3">
+                    <label  for="FCReptPass" class="form-label" >Repetir Contraseña</label>
+                    <input type="text" class="form-control" id="FCReptPass" name="FCpassAgain" placeholder="Repetir contraseña" required>
+                </div>
+                <select class="form-select" name="selectClienteProve" aria-label="Basico" required>
+                    <option disabled selected>Eres cliente o proveedor?</option>
+                    <option value="cliente">Cliente</option>
+                    <option value="proveedor">Proveedor</option>
+                </select>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button style="margin-top: 10px;" type="submit" id="login" class="btn btn-primary btn-block">Crear Usuario</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Huerto Libre</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cliente.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous"></head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.main.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Bienvenido!</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/nuevoPedido/{{usuario.idUser}}">NUEVO PEDIDO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/pedidosUsuario/{{usuario.idUser}}">MIS PEDIDOS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/chats/{{usuario.idUser}}/0">CHAT</a>
+            </li>
+          </ul>
+            <a class="nav-link active" onclick="window.modal1.showModal();" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                </svg>
+            </a>
+        </div>
+      </div>
+    </nav>
+    <dialog id="modal1">
+       <h2>Seguro que quieres cerrar la sesion?</h2>
+       <a onclick="window.modal1.close();" class="btn btn-primary" href="/">Cerrar Sesion</a>
+       <button onclick="window.modal1.close();" class="btn btn-primary">Cancelar</button>
+    </dialog>
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            {% if todosLosPedidos|length == 0:%}
+            <div class="card">
+              <div class="card-header">
+                No hay pedidos!
+              </div>
+              <div class="card-body">
+                <p class="card-text">No tienes pedidos en camino. No esperes mas y empieza a acercar productos frescos y de proximidad a tu vida!</p>
+                <a href="/nuevoPedido/{{usuario.idUser}}" class="btn btn-primary">Hacer tu primer pedido!</a>
+              </div>
+            </div>
+            {% else %}
+                {% for item in todosLosPedidos: %}
+            <div class="card" style="width:18rem;">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <p><strong>Fecha del pedido:</strong> {{item[0][4]}}</p>
+                        {% for obje in item: %}
+                        <li class="list-group-item" style="background: #C7CC72">{{obje[1]}} x {{obje[2]}}</li>
+                        {% endfor %}
+                        <p><strong>Precio total:</strong> {{item[0][5]}} €</p>
+                    </ul>
+                </div>
+            </div>
+                {% endfor %}
+            {% endif%}
+        </div>
+    </div>
+    <style>
+      .container {
+        margin-top: 50px;
+      }
+      .card {
+        margin: 0 10px;
+        margin-top: 20px;
+      }
+    </style>
+</body>
+</html>

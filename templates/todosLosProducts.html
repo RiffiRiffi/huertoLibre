@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Huerto Libre</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cliente.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">        <!---- plotly -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+    <script type="text/javascript" src="dist/plotly.js"></script>
+    <style>
+        iframe {
+            width: 100%;
+            height: 300px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Bienvenido!</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/todos/2">TODOS LOS PRODUCTOS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/todos/1">TODOS LOS USUARIOS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/todos/3">TODOS LOS PEDIDOSS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/todos/4">CHAT</a>
+            </li>
+          </ul>
+            <a class="nav-link active" onclick="window.modal1.showModal();" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                </svg>
+            </a>
+        </div>
+      </div>
+    </nav>
+        <dialog id="modal1">
+           <h2>Seguro que quieres cerrar la sesion?</h2>
+           <a onclick="window.modal1.close();" class="btn btn-primary" href="/">Cerrar Sesion</a>
+           <button onclick="window.modal1.close();" class="btn btn-primary">Cancelar</button>
+        </dialog>
+    <main class="form-signin w-100 m-auto">
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+               {% for product in full: %}
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{product[1]}}</h5>
+                    <p class="card-text">ID Producto: {{product[0]}}</p>
+                    <p class="card-text">Descripción: {{product[2]}}</p>
+                    <p class="card-text">Precio: {{product[4]}} €/Kg</p>
+                    <p class="card-text">Cantidad Stock: {{product[5]}} Kg</p>
+                    <iframe class="iframe" src="{{ url_for('create_bar_chart', product=product[1]) }}" width="500" height="300" frameborder="1"></iframe>
+                    <a type="button" href="/eliminar/{{product[0]}}/2" class="btn btn-danger btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </a>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <style>
+      .container {
+        margin-top: 50px;
+      }
+      .card {
+        margin: 0 10px;
+        margin-top: 20px;
+      }
+    </style>
+</body>
+</html>

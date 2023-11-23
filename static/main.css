@@ -1,0 +1,52 @@
+html,
+body {
+height: 100%;
+    background: #E4F0D7;
+    background: -webkit-linear-gradient(to top, #A9CE82, #E4F0D7);
+    background: linear-gradient(to top, #A9CE82, #E4F0D7);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 0px;
+  padding-bottom: 40px;
+  background-color: white;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-floating>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    border: var(--bs-border-width) solid transparent;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out,transform .1s ease-in-out;
+}
